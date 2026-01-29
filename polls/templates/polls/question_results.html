@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results for "What is the capital of France?"</title>
+    <link rel="stylesheet" href="{% static 'polls/css/result_styles.css' %}">
+
+</head>
+<body>
+    <h1>Results for "{{object.question_text}}"</h1>
+
+    <ul>
+        {% for choice in choices %}
+        <li>
+            <strong> {{choice.choice_text}} </strong>: {{choice.votes}} votes
+        </li>
+        {% endfor %}
+    </ul>
+    <p><a href="{% url 'polls:index' %}">Back to the Question List</a></p>
+</body>
+</html>

@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latest Questions</title>
+    <link rel="stylesheet" href="{% static 'polls/css/list_styles.css' %}">
+</head>
+<body>
+    <h1>Latest Questions</h1>
+    {% if top_5_latest_question_list %}
+    <ul>
+        {% for question in top_5_latest_question_list %}
+        <li>
+            <h2>{{ question.question_text }}</h2>
+            <p>Posted on: {{question.pub_date}}</p>
+            <p><a href="{% url 'polls:detail' question.id %}">View Question</a></p>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p></p>
+    {% endif %}
+</body>
+</html>

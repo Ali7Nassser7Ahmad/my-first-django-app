@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question Detail</title>
+    <link rel="stylesheet" href="{% static 'polls/css/detail_styles.css' %}">
+</head>
+<body>
+    <h1>{{object.question_text}}</h1>
+
+    {% if object.choice_set.exists %}
+    <p>Choose your answer:</p>
+    <form method="post" action="{% url 'polls:vote' object.id %}">
+        {% csrf_token %}
+        <!-- Simulated Choices -->
+        <div>
+            {% for choice in object.choice_set.all %}
+                <label>
+                    <input type="radio" required name="choice" value="{{choice.id}}">
+                    {{choice.choice_text}}
+                </label><br>
+            {% endfor %}
+        </div>
+
+        <button type="submit">Vote</button>
+    </form>
+    {% endif %}
+
+    <p><a href="{% url 'polls:index' %}">Back to the Question List</a></p>
+</body>
+</html>
